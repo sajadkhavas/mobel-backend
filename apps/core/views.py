@@ -22,4 +22,7 @@ def readiness(request):
     checks["cache"] = cache.get(cache_key) == "ok"
 
     ready = all(checks.values())
-    return Response({"status": "ready" if ready else "not_ready", "checks": checks}, status=200 if ready else 503)
+    return Response(
+        {"status": "ready" if ready else "not_ready", "checks": checks},
+        status=200 if ready else 503,
+    )
