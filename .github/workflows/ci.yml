@@ -27,6 +27,8 @@ jobs:
         run: ruff format --check .
       - name: Django checks
         run: python manage.py check --settings=config.settings.test
+      - name: Migration drift
+        run: python manage.py makemigrations --check --dry-run --settings=config.settings.test
       - name: Tests
         run: pytest
 
