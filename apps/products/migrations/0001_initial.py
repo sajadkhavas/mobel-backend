@@ -73,7 +73,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "categories",
-                    models.ManyToManyField(blank=True, related_name="products", to="catalog.category"),
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="products",
+                        to="catalog.category",
+                    ),
                 ),
                 (
                     "collections",
@@ -85,7 +89,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "materials",
-                    models.ManyToManyField(blank=True, related_name="products", to="catalog.material"),
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="products",
+                        to="catalog.material",
+                    ),
                 ),
                 (
                     "styles",

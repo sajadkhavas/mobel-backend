@@ -209,7 +209,11 @@ class ProductAttributeAssignment(BaseModel):
         elif attribute.input_type == Attribute.InputType.TEXT:
             if not self.text_value.strip():
                 errors["text_value"] = "This attribute requires a text value."
-            if self.selected_value_id or self.number_value is not None or self.boolean_value is not None:
+            if (
+                self.selected_value_id
+                or self.number_value is not None
+                or self.boolean_value is not None
+            ):
                 errors["__all__"] = "Text attributes can only store text_value."
         elif attribute.input_type == Attribute.InputType.NUMBER:
             if self.number_value is None:
