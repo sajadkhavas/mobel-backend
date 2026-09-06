@@ -7,7 +7,7 @@ def test_health_endpoint(client):
     assert response.json() == {"status": "ok", "service": "mobel-backend"}
 
 
-def test_readiness_endpoint(client):
+def test_readiness_endpoint(client, db):
     response = client.get(reverse("system-ready"))
     assert response.status_code == 200
     body = response.json()
