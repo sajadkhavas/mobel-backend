@@ -37,6 +37,9 @@ line-length = 100
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "config"]
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
