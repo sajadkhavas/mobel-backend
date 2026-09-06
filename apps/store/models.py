@@ -161,8 +161,7 @@ class FeatureFlag(BaseModel):
     @classmethod
     def resolved(cls):
         flags = {
-            str(key): {"enabled": enabled, "config": {}}
-            for key, enabled in cls.DEFAULTS.items()
+            str(key): {"enabled": enabled, "config": {}} for key, enabled in cls.DEFAULTS.items()
         }
         for flag in cls.objects.all().only("key", "enabled", "config"):
             flags[flag.key] = {"enabled": flag.enabled, "config": flag.config}
