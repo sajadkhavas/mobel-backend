@@ -1,3 +1,4 @@
+from datetime import timedelta
 from decimal import Decimal
 
 import pytest
@@ -139,7 +140,7 @@ def test_public_product_list_filters_visibility_and_has_bounded_query_count(clie
         name="Future",
         slug="future",
         base_sku="FUTURE",
-        published_at=timezone.now() + timezone.timedelta(days=1),
+        published_at=timezone.now() + timedelta(days=1),
     )
 
     with CaptureQueriesContext(connection) as queries:

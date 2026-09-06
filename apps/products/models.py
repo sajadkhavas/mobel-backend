@@ -71,15 +71,12 @@ class Product(BaseModel):
         constraints = [
             models.CheckConstraint(
                 condition=models.Q(
-                    production_lead_time_max_days__gte=models.F(
-                        "production_lead_time_min_days"
-                    )
+                    production_lead_time_max_days__gte=models.F("production_lead_time_min_days")
                 ),
                 name="product_lead_time_order",
             ),
             models.CheckConstraint(
-                condition=~models.Q(status="published")
-                | models.Q(published_at__isnull=False),
+                condition=~models.Q(status="published") | models.Q(published_at__isnull=False),
                 name="published_product_has_date",
             ),
         ]
@@ -197,8 +194,10 @@ class ProductAttributeAssignment(BaseModel):
         if self.selected_value_id and self.selected_value.attribute_id != self.attribute_id:
             errors["selected_value"] = "Selected value must belong to the assigned attribute."
 
-        other_values_present = bool(self.text_value) or self.number_value is not None or (
-            self.boolean_value is not None
+        other_values_present = (
+            bool(self.text_value)
+            or self.number_value is not None
+            or (self.boolean_value is not None)
         )
 
         if attribute.input_type in (Attribute.InputType.SELECT, Attribute.InputType.COLOR):
