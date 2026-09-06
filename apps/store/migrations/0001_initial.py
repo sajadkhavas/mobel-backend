@@ -32,7 +32,10 @@ def seed_store_configuration(apps, schema_editor):
         "inventory": True,
     }
     for key, enabled in defaults.items():
-        FeatureFlag.objects.get_or_create(key=key, defaults={"enabled": enabled, "config": {}})
+        FeatureFlag.objects.get_or_create(
+            key=key,
+            defaults={"enabled": enabled, "config": {}},
+        )
 
 
 def keep_merchant_data(apps, schema_editor):
@@ -47,7 +50,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="FeatureFlag",
             fields=[
-                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 (
@@ -78,7 +89,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="SocialLink",
             fields=[
-                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 ("key", models.SlugField(max_length=64, unique=True)),
@@ -110,7 +129,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="StoreLocation",
             fields=[
-                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 ("name", models.CharField(max_length=160)),
@@ -134,8 +161,24 @@ class Migration(migrations.Migration):
                 ("postal_code", models.CharField(blank=True, max_length=20)),
                 ("phone", models.CharField(blank=True, max_length=32)),
                 ("whatsapp", models.CharField(blank=True, max_length=32)),
-                ("latitude", models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True)),
-                ("longitude", models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True)),
+                (
+                    "latitude",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=6,
+                        max_digits=9,
+                        null=True,
+                    ),
+                ),
+                (
+                    "longitude",
+                    models.DecimalField(
+                        blank=True,
+                        decimal_places=6,
+                        max_digits=9,
+                        null=True,
+                    ),
+                ),
                 ("map_url", models.URLField(blank=True)),
                 ("working_hours", models.JSONField(blank=True, default=dict)),
                 ("is_primary", models.BooleanField(default=False)),
@@ -156,17 +199,36 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="StoreSettings",
             fields=[
-                ("id", models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("singleton_key", models.CharField(default="default", editable=False, max_length=32, unique=True)),
+                (
+                    "singleton_key",
+                    models.CharField(
+                        default="default",
+                        editable=False,
+                        max_length=32,
+                        unique=True,
+                    ),
+                ),
                 ("name", models.CharField(default="Mobel", max_length=160)),
                 ("legal_name", models.CharField(blank=True, max_length=200)),
                 ("tagline", models.CharField(blank=True, max_length=240)),
                 ("logo_url", models.URLField(blank=True)),
                 ("favicon_url", models.URLField(blank=True)),
                 ("primary_color", models.CharField(default="#111111", max_length=7)),
-                ("secondary_color", models.CharField(default="#F5F5F5", max_length=7)),
+                (
+                    "secondary_color",
+                    models.CharField(default="#F5F5F5", max_length=7),
+                ),
                 ("accent_color", models.CharField(default="#A67C52", max_length=7)),
                 ("phone", models.CharField(blank=True, max_length=32)),
                 ("support_phone", models.CharField(blank=True, max_length=32)),
@@ -182,7 +244,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("locale", models.CharField(default="fa-IR", max_length=16)),
-                ("timezone", models.CharField(default="Asia/Tehran", max_length=64)),
+                (
+                    "timezone",
+                    models.CharField(default="Asia/Tehran", max_length=64),
+                ),
             ],
             options={
                 "verbose_name": "Store settings",
